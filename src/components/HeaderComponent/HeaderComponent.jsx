@@ -12,6 +12,7 @@ import {
   CaretDownOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
+import ButtonInputSearch from "../ButtonInputSearch/ButtonInputSearch";
 const HeaderComponent = () => {
   return (
     <div>
@@ -20,13 +21,20 @@ const HeaderComponent = () => {
           <WrapperTextHeader>Dao-Thanh-Tung</WrapperTextHeader>
         </Col>
         <Col span={12}>
-          <Search
+          <ButtonInputSearch
+            size="large"
+            bordered={false}
+            textButton="Tìm Kiếm"
+            placeholder="Input search text"
             placeholder="input search text"
-            enterButton
+
             //
           />
         </Col>
-        <Col span={6} style={{ display: "flex", gap: "20px" }}>
+        <Col
+          span={6}
+          style={{ display: "flex", gap: "20px", alignItems: "center" }}
+        >
           <WrapperHeaderAccount>
             <UserOutlined style={{ fontSize: "30px" }} />
             <div>
