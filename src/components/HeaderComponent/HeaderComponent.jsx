@@ -26,7 +26,6 @@ const HeaderComponent = () => {
             bordered={false}
             textButton="Tìm Kiếm"
             placeholder="Input search text"
-            placeholder="input search text"
 
             //
           />

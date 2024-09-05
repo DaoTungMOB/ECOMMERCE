@@ -5,6 +5,8 @@ export const WarpperHeader = styled(Row)`
   padding: 10px 120px;
   background-color: rgb(36, 122, 125);
   align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
 `;
 export const WrapperTextHeader = styled.span`
   color: white;
@@ -22,4 +24,5 @@ export const WrapperHeaderAccount = styled.div`
 export const WrapperTextHeaderSmall = styled.span`
   font-size: 12px;
   color: white;
+  white-space: nowrap;
 `;
