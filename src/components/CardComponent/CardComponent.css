@@ -1,0 +1,14 @@
+.custom-card .ant-card-body {
+  padding: 10px;
+}
+.image-container {
+  width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều rộng khung */
+  position: relative; /* Cho phép đặt các phần tử khác lên trên hình ảnh */
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Đảm bảo ảnh vừa khung mà không bị méo */
+}
