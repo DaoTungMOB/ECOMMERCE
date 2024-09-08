@@ -73,16 +73,6 @@ const NavbarComponent = () => {
           "smartwatch",
         ])}
       </WrapperContent>
-      <WrapperContent>
-        {renderContent("checkbox", [
-          { value: "a", label: "A" },
-          { value: "b", label: "B" },
-        ])}
-      </WrapperContent>
-      <WrapperContent>{renderContent("star", [3, 4, 5])}</WrapperContent>
-      <WrapperContent>
-        {renderContent("price", ["duoi 400000 VND", "tren 500000VND"])}
-      </WrapperContent>
     </div>
   );
 };
