@@ -14,7 +14,7 @@ const CardComponent = () => {
   return (
     <WrapperCardStyle
       hoverable
-      style={{ width: 220 }}
+      style={{ width: 242 }}
       className="custom-card"
       cover={
         <div className="image-container">
@@ -34,7 +34,8 @@ const CardComponent = () => {
             <WrapperStyleTextSell> | Da ban 1000+</WrapperStyleTextSell>
           </WrapperReportText>
           <WrapperPriceText>
-            1.000.000 VND <WrapperDiscountText>-5%</WrapperDiscountText>{" "}
+            <span style={{ marginRight: "8px" }}>1.000.000 VND </span>
+            <WrapperDiscountText>-5%</WrapperDiscountText>{" "}
           </WrapperPriceText>
         </div>
       }

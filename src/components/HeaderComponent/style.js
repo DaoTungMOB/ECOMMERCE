@@ -2,11 +2,12 @@ import { Row } from "antd";
 import styled from "styled-components";
 
 export const WarpperHeader = styled(Row)`
-  padding: 10px 120px;
   background-color: rgb(36, 122, 125);
   align-items: center;
   gap: 16px;
   flex-wrap: nowrap;
+  width: 1270px; // or 1270px
+  padding: 10px 0;
 `;
 export const WrapperTextHeader = styled.span`
   color: white;

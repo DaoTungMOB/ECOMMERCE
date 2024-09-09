@@ -1,6 +1,6 @@
 import { Image, Slider as AntSlider } from "antd"; // Đổi tên Slider từ antd thành AntSlider
 import React from "react";
-import Slider from "react-slick"; // Slider từ react-slick
+import { WrapperSliderStyle } from "./style";
 
 const SliderComponent = ({ arrImages }) => {
   const settings = {
@@ -14,7 +14,7 @@ const SliderComponent = ({ arrImages }) => {
   };
 
   return (
-    <Slider {...settings}>
+    <WrapperSliderStyle {...settings}>
       {arrImages.map((image) => (
         <div key={image}>
           <Image
@@ -26,7 +26,7 @@ const SliderComponent = ({ arrImages }) => {
           />
         </div>
       ))}
-    </Slider>
+    </WrapperSliderStyle>
   );
 };
 

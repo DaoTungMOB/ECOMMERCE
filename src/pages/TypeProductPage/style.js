@@ -2,9 +2,7 @@ import { Col } from "antd";
 import styled from "styled-components";
 export const WrapperProducts = styled.div`
   display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 20px;
+  gap: 12px;
   flex-wrap: wrap;
 `;
 export const WrapperNavbar = styled(Col)`
@@ -14,4 +12,5 @@ export const WrapperNavbar = styled(Col)`
   border-radius: 4px;
   height: fit-content;
   margin-top: 20px;
+  width: 200px;
 `;
