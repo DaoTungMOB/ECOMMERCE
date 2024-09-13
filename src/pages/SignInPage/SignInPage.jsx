@@ -9,8 +9,35 @@ import InputForm from "../../components/InputForm/InputForm";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import imageLogo from "../../assets/images/logo-login.png";
 import { Image } from "antd";
+import { useNavigate } from "react-router-dom";
+import * as UserService from "../../services/UserService";
+import { useMutationHooks } from "../../hooks/useMutationHook";
+import Loading from "../../components/LoadingComponent/Loading";
+
 const SignInPage = () => {
   const [iShowPassword, setiShowPassword] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const navigate = useNavigate();
+
+  const mutation = useMutationHooks((data) => UserService.loginUser(data));
+  const { data, isLoading } = mutation;
+  console.log("mutation", mutation);
+
+  const handleNavigateSignUp = () => {
+    navigate("/sign-up");
+  };
+
+  const handleOnchangeEmail = (value) => {
+    setEmail(value);
+  };
+  const handleOnchangePassword = (value) => {
+    setPassword(value);
+  };
+  const handleSignIn = () => {
+    mutation.mutate({ email, password });
+    console.log("sign-in", email, password);
+  };
   return (
     <div
       style={{
@@ -36,10 +63,13 @@ const SignInPage = () => {
           <InputForm
             style={{ marginBottom: "10px" }}
             placeholder="abcd@gmail.com"
+            value={email}
+            onChange={handleOnchangeEmail}
           />
 
           <div style={{ position: "relative" }}>
             <span
+              onClick={() => setiShowPassword(!iShowPassword)}
               style={{
                 zIndex: 10,
                 position: "absolute",
@@ -52,10 +82,17 @@ const SignInPage = () => {
             <InputForm
               placeholder="password"
               type={iShowPassword ? "text" : "password"}
+              value={password}
+              onChange={handleOnchangePassword}
             />
           </div>
+          {data?.status === "error" && (
+            <span style={{ color: "red" }}>{data?.message}</span>
+          )}
+          {/* <Loading isLoading={isLoading}> */}
           <ButtonComponent
-            border={false}
+            disabled={!email.length || !password.length}
+            onClick={handleSignIn}
             size={40}
             styleButton={{
               background: "rgb(255, 57, 69)",
@@ -72,12 +109,15 @@ const SignInPage = () => {
               fontWeight: "700",
             }}
           ></ButtonComponent>
+          {/* </Loading> */}
           <p>
             <WrapperTextLight>Quên mật khẩu</WrapperTextLight>
           </p>
           <p>
             Chưa có tài khoản?{" "}
-            <WrapperTextLight>Tạo tài khoản</WrapperTextLight>
+            <WrapperTextLight onClick={handleNavigateSignUp}>
+              Tạo tài khoản
+            </WrapperTextLight>
           </p>
         </WrapperContainerLeft>
         <WrapperContainerRight>
