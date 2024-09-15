@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import imageLogo from "../../assets/images/logo-login.png";
 import {
@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import * as UserService from "../../services/UserService";
 import { useMutationHooks } from "../../hooks/useMutationHook";
 import Loading from "../../components/LoadingComponent/Loading";
+import * as message from "../../components/Message/Message";
 const SignUpPage = () => {
   const navigate = useNavigate();
 
@@ -26,7 +27,15 @@ const SignUpPage = () => {
   };
 
   const mutation = useMutationHooks((data) => UserService.signupUser(data));
-  const { data, isLoading } = mutation;
+  const { data, isLoading, isSuccess, isError } = mutation;
+  useEffect(() => {
+    if (isSuccess) {
+      message.success("Đăng ký thành công");
+      handleNavigateSignIn();
+    } else if (isError) {
+      message.error("Đăng ký thất bại");
+    }
+  });
 
   const handleOnchangePassword = (value) => {
     setPassword(value);
@@ -34,7 +43,7 @@ const SignUpPage = () => {
   const handleOnchangeConfirmPassword = (value) => {
     setConfirmPassword(value);
   };
-  const NavigateSignIn = () => {
+  const handleNavigateSignIn = () => {
     navigate("/sign-in");
   };
   const handleSignUp = () => {
@@ -136,7 +145,7 @@ const SignUpPage = () => {
           {/* </Loading> */}
           <p>
             Bạn đã có tài khoản?
-            <WrapperTextLight onClick={NavigateSignIn}>
+            <WrapperTextLight onClick={handleNavigateSignIn}>
               {" "}
               Đăng nhập
             </WrapperTextLight>

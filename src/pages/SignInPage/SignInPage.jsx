@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import {
   WrapperContainerLeft,
@@ -13,15 +13,38 @@ import { useNavigate } from "react-router-dom";
 import * as UserService from "../../services/UserService";
 import { useMutationHooks } from "../../hooks/useMutationHook";
 import Loading from "../../components/LoadingComponent/Loading";
-
+import { useDispatch } from "react-redux";
+import { jwtDecode } from "jwt-decode";
+import { updateUser } from "../../redux/slides/userSlide";
 const SignInPage = () => {
   const [iShowPassword, setiShowPassword] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const mutation = useMutationHooks((data) => UserService.loginUser(data));
-  const { data, isLoading } = mutation;
+  const { data, isLoading, isSuccess } = mutation;
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+      console.log("data", data);
+      localStorage.getItem("access_token", data?.access_token);
+      if (data?.access_token) {
+        const decoded = jwtDecode(data?.access_token);
+
+        if (decoded?.id) {
+          handleGetDetailsUser(decoded?.id, data?.access_token);
+        }
+      }
+    }
+  }, [isSuccess]);
+
+  const handleGetDetailsUser = async (id, token) => {
+    const res = await UserService.getDetailsUser(id, token);
+    dispatch(updateUser({ ...res?.data, access_token: token }));
+  };
   console.log("mutation", mutation);
 
   const handleNavigateSignUp = () => {
