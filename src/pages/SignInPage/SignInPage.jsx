@@ -26,14 +26,14 @@ const SignInPage = () => {
 
   const mutation = useMutationHooks((data) => UserService.loginUser(data));
   const { data, isLoading, isSuccess } = mutation;
+
   useEffect(() => {
     if (isSuccess) {
       navigate("/");
       console.log("data", data);
-      localStorage.getItem("access_token", data?.access_token);
+      localStorage.setItem("access_token", JSON.stringify(data?.access_token));
       if (data?.access_token) {
         const decoded = jwtDecode(data?.access_token);
-
         if (decoded?.id) {
           handleGetDetailsUser(decoded?.id, data?.access_token);
         }
