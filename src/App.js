@@ -64,7 +64,7 @@ function App() {
               return (
                 <Route
                   key={route.path}
-                  path={ischeckAuth ? route.path : "ccc"}
+                  path={route.path}
                   element={
                     <Layout>
                       <Page />
